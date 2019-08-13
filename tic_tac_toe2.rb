@@ -36,17 +36,20 @@ class Board
   def win?
     current_board = self.board
     for i in 0..2 do
+      #check row -> bug here when you insert first element into [0,0]
       if (current_board[i][0] != '[_]' && current_board[i][0] == current_board[i][1] && current_board[i][1] == current_board[i][2])
            return current_board[i][0]
       end
+      #check columns
       if (current_board[0][i] != '[_]' && current_board[0][i] == current_board[1][i] && current_board[1][i] == current_board[2][i])
           return current_board[0][i]
       end
     end
+    #check main diagonal
     if (current_board[0][0] != '[_]' && current_board[0][0] == current_board[1][1] &&  current_board[1][1] == current_board[2][2])
       return current_board[0][0]
     end
-
+    #check secondary diagonal
     if current_board[0][0] != '[_]' && current_board[2][0] == current_board[1][1] && current_board[1][1] == current_board[0][2]
       return current_board[2][0]
     end
@@ -78,7 +81,6 @@ class Player
     row = gets.chomp.downcase.to_i
     print "Enter position to enter #{self.sign.upcase} in(column): "
     column = gets.chomp.downcase.to_i
-    #check if posiiton is already filled with 'x' or 'o'
     [row,column]
   end
 
@@ -123,26 +125,6 @@ class Game
     @new_board.board
   end
 
-  def win?
-    # 9 possible win scenarios
-    to_return = false
-  end
-
 end
 
 Game.new()
-
-
-
-
-
-
-#new_board = Board.new(3,3)
-#puts new_board.board.inspect
-#new_board.show_board
-#player1 = Player.new
-#player2 = Player.new
-#new_board.modify_board(player1.add_move, player1.sign)
-#new_board.show_board
-#new_board.modify_board(player2.add_move, player2.sign)
-#new_board.show_board
